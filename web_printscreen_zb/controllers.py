@@ -98,7 +98,7 @@ class ZbExcelExport(ExcelExport):
                                  )
 
 class ExportPdf(Export):
-    _cp_path = '/web/export/pdf'
+    _cp_path = '/web/export/zb_pdf'
     fmt = {
         'tag': 'pdf',
         'label': 'PDF',
