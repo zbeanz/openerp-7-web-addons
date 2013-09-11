@@ -22,7 +22,7 @@
 
 {
     'name': 'Web Printscreen ZB',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Web',
     'description': """
         Module to export current active tree view in to excel report

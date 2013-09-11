@@ -32,7 +32,7 @@ openerp.web_printscreen_zb = function(instance, m) {
                 header_td_elements = $header_ele.find('th')
                 $.each(header_td_elements,function(){
                     $header_td = $(this)
-                    text = $header_td.text().trim()
+                    text = $header_td.text().trim() || ""
                     data_id = $header_td.attr('data-id')
                     if (text && !data_id){
                         data_id = 'group_name'
@@ -49,27 +49,29 @@ openerp.web_printscreen_zb = function(instance, m) {
                 data = []
                 $data_ele = $(this)
                 is_analysis = false
-                
+                if ($data_ele.text().trim()){
                 //Find group name
-                group_th_eles = $data_ele.find('th')
-                $.each(group_th_eles,function(){
-                    $group_th_ele = $(this)
-                    text = $group_th_ele.text()
-                    is_analysis = true
-                    data.push({'data': text, 'bold': true})
-                });
-                data_td_eles = $data_ele.find('td')
-                $.each(data_td_eles,function(){
-                    $data_td_ele = $(this)
-                    text = $data_td_ele.text().trim()
-                    if ($data_td_ele && $data_td_ele[0].classList.contains('oe_number')){
-                        data.push({'data': text, 'number': true})
-                    }
-                    else{
-                        data.push({'data': text})
-                    }
-                });
-                export_data.push(data)
+	                group_th_eles = $data_ele.find('th')
+	                $.each(group_th_eles,function(){
+	                    $group_th_ele = $(this)
+	                    text = $group_th_ele.text()
+	                    is_analysis = true
+	                    data.push({'data': text, 'bold': true})
+	                });
+	                data_td_eles = $data_ele.find('td')
+	                $.each(data_td_eles,function(){
+	                    $data_td_ele = $(this)
+	                    text = $data_td_ele.text().trim() || ""
+	                    if ($data_td_ele && $data_td_ele[0].classList.contains('oe_number')){
+	                        text = instance.web.parse_value(text, { type:"float" })
+	                        data.push({'data': text || "", 'number': true})
+	                    }
+	                    else{
+	                        data.push({'data': text})
+	                    }
+	                });
+	                export_data.push(data)
+                }
             });
             
             //Find Footer Element
@@ -81,9 +83,10 @@ openerp.web_printscreen_zb = function(instance, m) {
                 footer_td_eles = $footer_ele.find('td')
                 $.each(footer_td_eles,function(){
                     $footer_td_ele = $(this)
-                    text = $footer_td_ele.text().trim()
+                    text = $footer_td_ele.text().trim() || ""
                     if ($footer_td_ele && $footer_td_ele[0].classList.contains('oe_number')){
-                        data.push({'data': text, 'bold': true, 'number': true})
+                        text = instance.web.parse_value(text, { type:"float" })
+                        data.push({'data': text || "", 'bold': true, 'number': true})
                     }
                     else{
                         data.push({'data': text, 'bold': true})
