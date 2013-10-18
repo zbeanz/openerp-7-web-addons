@@ -63,6 +63,7 @@ openerp.web_printscreen_zb = function(instance, m) {
 	                    $data_td_ele = $(this)
 	                    text = $data_td_ele.text().trim() || ""
 	                    if ($data_td_ele && $data_td_ele[0].classList.contains('oe_number')){
+	                        text = text.replace('%', '')
 	                        text = instance.web.parse_value(text, { type:"float" })
 	                        data.push({'data': text || "", 'number': true})
 	                    }
