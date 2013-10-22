@@ -62,7 +62,7 @@ openerp.web_printscreen_zb = function(instance, m) {
 	                $.each(data_td_eles,function(){
 	                    $data_td_ele = $(this)
 	                    text = $data_td_ele.text().trim() || ""
-	                    if ($data_td_ele && $data_td_ele[0].classList.contains('oe_number')){
+	                    if ($data_td_ele && $data_td_ele[0].classList.contains('oe_number') && !$data_td_ele[0].classList.contains('oe_list_field_float_time')){
 	                        text = text.replace('%', '')
 	                        text = instance.web.parse_value(text, { type:"float" })
 	                        data.push({'data': text || "", 'number': true})
