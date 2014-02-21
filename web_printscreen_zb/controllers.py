@@ -108,6 +108,7 @@ class ExportPdf(Export):
         'error': None
     }
     
+    @property
     def content_type(self):
         return 'application/pdf'
     
